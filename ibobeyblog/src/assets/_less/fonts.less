@@ -1,0 +1,26 @@
+﻿@fontName: 'NunitoRegular', 'NunitoMedium', 'NunitoBold';
+@fontURL: 'Nunito/NunitoRegular/NunitoRegular','Nunito/NunitoMedium/NunitoMedium','Nunito/NunitoBold/NunitoBold';
+@fontPath: '../Font/';
+@fontCount: 3;
+
+
+// font mixin
+.fonts(@count, @fontNames, @fontUrls, @fontBasePath) { .for(@count);
+    .-each(@i) {
+        @name: extract(@fontNames, @i);
+        @url: extract(@fontUrls, @i);
+        @font-face { font-family: @name; src: url("@{fontBasePath}@{url}.eot"); src: url("@{fontBasePath}@{url}.eot?#iefix") format("embedded-opentype"), url("@{fontBasePath}@{url}.woff") format("woff"), url("@{fontBasePath}@{url}.ttf") format("truetype"), url("@{fontBasePath}@{url}.svg") format("svg"); font-weight: normal; font-style: normal; }
+    }
+}
+
+// .for
+.for(@i, @n) {.-each(@i) }
+.for(@n) when (isnumber(@n)) {.for(1, @n) }
+.for(@i, @n) when not (@i = @n) { .for((@i + (@n - @i) / abs(@n - @i)), @n); }
+
+// .for-each
+.for(@array) when (default()) {.for-impl_(length(@array)) }
+.for-impl_(@i) when (@i > 1) {.for-impl_((@i - 1)) }
+.for-impl_(@i) when (@i > 0) {.-each(extract(@array, @i)) }
+
+.fonts(@fontCount, @fontName, @fontURL, @fontPath);

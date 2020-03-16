@@ -1,27 +1,20 @@
 import React from 'react';
-import Navi from './Navi';
-import CategoryList from './CategoryList';
-import ProductList from './ProductList';
-import { Row, Col, Container } from 'reactstrap';
+import LeftLayer from './Views/LeftLayer';
+import HomeContent from './Views/HomeContent';
+import RightLayer from './Views/RightLayer';
+import {} from 'reactstrap';
+import "./assets/_less/master.css";
 
 function App() {
   // let titleCategory = "Category List"
   let productInfo = {title:"Category List",name:"Adana"}
   return (
     <div>
-      <Container>
-        <Row>
-          <Navi />
-        </Row>
-        <Row>
-          <Col xs="3">
-            <CategoryList info={productInfo} />
-          </Col>
-          <Col xs="9">
-            <ProductList title="Product List" />
-          </Col>
-        </Row>
-      </Container>
+      <div className="wrapper">
+        <LeftLayer/>
+        <HomeContent/>
+        <RightLayer/>
+      </div>    
     </div>
   );
 }
